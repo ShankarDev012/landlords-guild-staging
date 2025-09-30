@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Sofia+Sans+Condensed:ital,wght@0,1..1000;1,1..1000&family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Sofia+Sans+Condensed:ital,wght@0,1..1000;1,1..1000&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Space+Grotesk:wght@300..700&display=swap');
+
+:root {
+  --primary-color: #bb9db1; 
+  --secondary-color: #91278F;
+  --light-grey-color: #f3eef381;
+  --text-color: #333;
+  --text-white: #fff;   
+  --text-black: #000;    
+  --font-size-base: 16px;
+  --heading-size: 52px;
+  --heading-font-f: 'Playfair Display', Georgia, "Times New Roman", serif;
+  --text-font-f: "Space Grotesk", sans-serif;
+}
+
+h1{
+    font-size: 62px !important;
+}
+h2{
+    font-size: 52px;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--heading-font-f);
+  font-weight: 700;
+  font-style: normal;
+}
+p, a, button{
+   font-family: var(--text-font-f)
+}
+p{
+    font-size: 18px;
+}
+.et_pb_module .et_pb_heading{
+    margin-bottom: 0 !important;
+}
+.btn:hover{
+    background-color: transparent !important;
+}
+.btn-bg-custom-primary{
+    background-color: var(--primary-color);
+}
+.btn-bg-custom-secondary{
+    background-color: var(--secondary-color);
+}
+.bg-custom-primary{
+    background-color: var(--primary-color);
+}
+.bg-custom-secondary{
+    background-color: var(--secondary-color);
+}
+.bg-light-grey{
+    background-color: var(--light-grey-color);
+}
+.navbar ul a{
+font-size: 16px;
+font-weight: 500;
+}
+.btn-bg-custom-primary{
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 100px;
+    border:none;
+    width: fit-content;
+}
+.hero-section{
+    width: 100%;
+    height: 740px;
+    background-image: url('images/uk-street-guild-of-residential-landlords.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border-radius: 20px;
+    z-index: -1;
+    position: relative;
+    padding-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-section::before{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(5px);
+    background: #0000008c;
+    box-shadow: 0 4px 30px #0000001a;
+    border-radius: 20px;
+    top: 0;
+}
+.inner-carousel{
+    position: relative;
+    z-index: 10;
+}
+.hr-line{
+    background: var(--secondary-color);
+    background: linear-gradient(120deg, rgba(187, 157, 177, 1) 17%, rgba(145, 39, 143, 1) 70%);
+    height: 4px;
+    width: 10%;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+.service-description{
+    height: 160px;
+}
+.accordion-header button{
+    background-color: #fff !important;
+    
+}
+.accordion-button:focus {
+    z-index: 3;
+    outline: 0;
+    box-shadow: none !important;
+    background-color: var(--primary-color) !important;
+}
+.contactCard{
+    height: 200px !important;
+}
+footer{
+    background-color: #222222;
+}
+
+
+@media only screen and (min-width: 320px) {
+  h1{
+    font-size: 38px !important;
+}
+.hero-section{
+    width: 100%;
+    height: 460px;
+}
+}
