@@ -291,7 +291,7 @@
                                     <div class="payment-box  w-100">
                                         <transition name="fade">
                                             <div v-if="paymentType === 'paypal'">
-                                                <button>PayPal</button>
+                                                <a href="https://www.paypal.com/signin"><p>PayPal</p></a>
                                             </div>
                                         </transition>
                                         <Transition name="fade">
