@@ -5,7 +5,7 @@
                 <Form @submit="onSubmit" :validation-schema="schema">
                     <div class="row gy-4">
                         <div class="col-12">
-                              <!-- Subscription components -->
+                            <!-- Subscription components -->
                             <div class="subscription-compo mb-5">
                                 <div class="row align-items-start justify-content-between">
                                     <div class="col-md-6">
@@ -16,11 +16,14 @@
                                                 <Field :name="subscriptionSelect" type="radio"
                                                     :value="subscriptionItem.value" v-slot="{ field }">
                                                     <div class="d-flex align-items-center">
-                                                        <input type="radio" v-bind="field" :id="subscriptionItem.value" :value="subscriptionItem.value" class="me-3" v-model="selectedSubscription" />
-                                                        <h6 style="margin-top: 5px;" class="fs-5">
-                                                            {{ subscriptionItem.title }}</h6>
+                                                        <input type="radio" v-bind="field" :id="subscriptionItem.value"
+                                                            :value="subscriptionItem.value" class="me-3"
+                                                            v-model="selectedSubscription" />
+                                                        <h6 style="margin-top: 5px;" class="fs-5">{{
+                                                            subscriptionItem.title }}</h6>
                                                     </div>
-                                                    <label :for="subscriptionItem.value">{{ subscriptionItem.label }}</label>
+                                                    <label :for="subscriptionItem.value">{{ subscriptionItem.label
+                                                    }}</label>
                                                 </Field>
                                             </div>
                                             <ErrorMessage :name="subscriptionSelect"
@@ -61,7 +64,7 @@
                                                 v-if="selectedSubscription === 'quarter'">
                                                 <div class="pricetable w-100 ms-auto">
                                                     <div class="subs-cription-title text-end">
-                                                        <h3 class="fs-5 mb-3">1. Quarterly subscription </h3>
+                                                        <h3 class="fs-5 mb-3">1. Quarterly subscription</h3>
                                                         <p class="amount-box px-2 py-1 border rounded-4 d-inline">£32.50
                                                         </p>
                                                     </div>
@@ -258,49 +261,123 @@
                                 </div>
                             </div>
                             <!-- Payment components -->
-                        <div class="payment-compo w-100 mt-4">
-                            <h5>Payment Mode:</h5>
-
-                            <div class="d-flex w-50">
-                                <div class="w-50" v-for="paymentOption in paymentMethod" :key="paymentOption.value">
-                                <Field :name="paymentModeSelect" type="radio" :value="paymentOption.value"
-                                    v-slot="{ field }">
-                                    <div style="width: fit-content;"
-                                        class="d-flex align-items-center border w-100 px-2 py-2 rounded gap-3 mb-2 inline bg-light-grey">
-                                        <input class="me-2" type="radio" v-bind="field" :id="paymentOption.value"
-                                            :value="paymentOption.value" v-model="paymentType">
-                                        <label :for="paymentOption.value">
-                                             <img :src="paymentOption.modeImg" alt="" :width="paymentOption.widthImg">
-                                             {{ paymentOption.label }}
-                                        </label>
+                            <div class="payment-compo w-100 mt-4">
+                                <h5>Payment Mode:</h5>
+                                <div class="d-md-flex w-50 my-3 gap-3">
+                                    <div class="col-md-6 p-0 text-center" v-for="paymentOption in paymentMethod"
+                                        :key="paymentOption.value">
+                                        <div>
+                                            <Field :name="paymentModeSelect" type="radio" :value="paymentOption.value"
+                                                v-slot="{ field }">
+                                                <div class="d-flex align-items-center justify-content-center mb-2">
+                                                    <label
+                                                        class="payment-compo-input position-relative text-uppercase rounded-3 bg-light-grey border py-3"
+                                                        :for="paymentOption.value">
+                                                        <input class="me-2" type="radio" v-bind="field"
+                                                            :id="paymentOption.value" :value="paymentOption.value"
+                                                            v-model="paymentType" />
+                                                        <span
+                                                            :class="paymentType === paymentOption.value ? 'check-active' : 'd-none'"
+                                                            class="position-absolute"><i
+                                                                class="bi bi-check-circle-fill fs-2"></i></span>
+                                                        {{ paymentOption.label }}
+                                                    </label>
+                                                </div>
+                                            </Field>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="payment-box  w-100">
+                                        <transition name="fade">
+                                            <div v-if="paymentType === 'paypal'">
+                                                <button>PayPal</button>
+                                            </div>
+                                        </transition>
+                                        <Transition name="fade">
+                                            <div v-if="paymentType === 'cards'">
+                                                <div class="row d-flex justify-content-center">
+                                                    <div class="">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <form>
+                                                                    <div class="mb-3">
+                                                                        <div class="form-outline w-100">
+                                                                            <label class="form-label"
+                                                                                for="typeText">Card
+                                                                                Number</label>
+                                                                            <input type="text" id="typeText"
+                                                                                class="form-control form-control-lg"
+                                                                                placeholder="1234 5678 9012 3457"
+                                                                                minlength="19" maxlength="19" />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-4">
+                                                                        <div class="form-outline w-100">
+                                                                            <label class="form-label"
+                                                                                for="typeName">Cardholder's Name</label>
+                                                                            <input type="text" id="typeName"
+                                                                                class="form-control form-control-lg"
+                                                                                placeholder="Cardholder's Name" />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="d-flex justify-content-between align-items-end pb-2 gap-2">
+                                                                        <div class="form-outline">
+                                                                            <input type="text" id="typeExp"
+                                                                                class="form-control form-control-lg"
+                                                                                placeholder="MM/YYYY" minlength="7"
+                                                                                maxlength="7" />
+                                                                            <label class="form-label"
+                                                                                for="typeExp">Expiration</label>
+                                                                        </div>
+
+                                                                        <div class="form-outline">
+                                                                            <input type="password" id="typeText2"
+                                                                                class="form-control form-control-lg"
+                                                                                placeholder="●●●" minlength="3"
+                                                                                maxlength="3" />
+                                                                            <label class="form-label"
+                                                                                for="typeText2">CVV</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <button type="button"
+                                                                        class="btn btn-info btn-lg btn-rounded">
+                                                                        Proceed to Payment <i
+                                                                            class="bi bi-arrow-right"></i>
+
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Transition>
+                                    </div>
+                                </div>
+
+                                <ErrorMessage :name="paymentModeSelect" class="error-message text-danger" />
+                            </div>
+                            <div class="input-col mt-3">
+                                <Field v-slot="{ field }" name="privacyPolicy" type="checkbox" :value="true"
+                                    :unchecked-value="false">
+                                    <label>
+                                        <input type="checkbox" name="privacyPolicy" v-bind="field" :value="true" /> I
+                                        have read and agree to the
+                                        <router-link to="/">Privacy Policy and Terms</router-link>
+                                    </label>
+                                    <br />
                                 </Field>
+                                <ErrorMessage name="privacyPolicy" class="error-message text-danger" />
                             </div>
+                            <div class="mt-4">
+                                <h4>Captcha</h4>
+                                <img src="/images/robot-captcha.png" alt="robot-captcha" width="250" />
                             </div>
-                            <ErrorMessage :name="paymentModeSelect" class="error-message text-danger" />
-
-                            <div v-if="paymentType == 'paypal'">
-                                <h1>Payment System</h1>
-                            </div>
-
-                            <h4>Captcha</h4>
-                            <img src="/images/robot-captcha.png" alt="robot-captcha" width="250">
                         </div>
-
-                        <div class="input-col mt-3">
-                            <Field v-slot="{ field }" name="privacyPolicy" type="checkbox" :value="true"
-                                :unchecked-value="false">
-                                <label>
-                                    <input type="checkbox" name="privacyPolicy" v-bind="field" :value="true" />
-                                    I have read and agree to the <router-link to="/">Privacy Policy and
-                                        Terms</router-link>
-                                </label> <br>
-                            </Field>
-                            <ErrorMessage name="privacyPolicy" class="error-message text-danger" />
-                        </div>
-                        </div>
-                        
-                        
                         <div class="col-2">
                             <button type="submit"
                                 class="button py-2 px-5 border rounded btn-bg-custom-secondary text-light">Next</button>
@@ -314,63 +391,78 @@
 
 <script setup>
 import { Form, Field, ErrorMessage } from "vee-validate";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
-import { ref } from 'vue';
-defineOptions({ name: "SubscriptionComp" })
+import { ref } from "vue";
+defineOptions({ name: "SubscriptionComp" });
 
 // const contactMethod = ref('annual')
 
 const paymentModeSelect = "Payment Method";
-const paymentType = ref('paypal')
+const paymentType = ref("cards");
 const paymentMethod = ref([
-    { label: 'PayPal', value: 'paypal', modeImg: "/images/paypal.png", widthImg: "40", },
-    { label: 'Crads', value: 'cards', modeImg: "/images/payment-card.png", widthImg: "200", },
+    { label: "Pay with card", value: "cards", modeImg: "/images/payment-card.png", widthImg: "80" },
+    { label: "Pay with paypal", value: "paypal", modeImg: "/images/paypal.png", widthImg: "80" },
 ]);
 
-const checkboxName = 'Newsletters';
+const checkboxName = "Newsletters";
 const checkboxOptions = ref([
-    { label: 'Weekly Digest of Guild Articles', value: 'Weekly Digest of Guild Articles' },
-    { label: 'All updates ENGLAND (approx. daily)', value: 'All updates ENGLAND (approx. daily)' },
-    { label: 'Main updates ENGLAND (approx weekly)', value: 'Main updates ENGLAND (approx weekly)' },
-    { label: 'Forms and Templates ENGLAND', value: 'Forms and Templates ENGLAND' },
-    { label: 'All updates WALES (approx daily)', value: 'All updates WALES (approx daily)' },
-    { label: 'Main updates WALES (approx weekly)', value: 'Main updates WALES (approx weekly)' },
-    { label: 'Forms and Templates WALES', value: 'Forms and Templates WALES' },
-    { label: 'Sales Emails (Your details never passed on)', value: 'Sales Emails (Your details never passed on)' },
+    { label: "Weekly Digest of Guild Articles", value: "Weekly Digest of Guild Articles" },
+    { label: "All updates ENGLAND (approx. daily)", value: "All updates ENGLAND (approx. daily)" },
+    { label: "Main updates ENGLAND (approx weekly)", value: "Main updates ENGLAND (approx weekly)" },
+    { label: "Forms and Templates ENGLAND", value: "Forms and Templates ENGLAND" },
+    { label: "All updates WALES (approx daily)", value: "All updates WALES (approx daily)" },
+    { label: "Main updates WALES (approx weekly)", value: "Main updates WALES (approx weekly)" },
+    { label: "Forms and Templates WALES", value: "Forms and Templates WALES" },
+    { label: "Sales Emails (Your details never passed on)", value: "Sales Emails (Your details never passed on)" }
 ]);
 
 const subscriptionSelect = "subscription"; // Field name for vee-validate
-const selectedSubscription = ref('annual'); // Default selected value
+const selectedSubscription = ref("annual"); // Default selected value
 const subscriptionOption = ref([
-    { value: 'quarter', title: "Quarterly subscription", label: '£39.00 Auto-renew quarterly subscription, cancel anytime before next auto-renew. Company or individual.' },
-    { value: 'annual', title: "Annual Subscription", label: ' £119.00 Auto-renewing annual subscription, cancel anytime before next auto-renew. Company or individual. Includes one staff or family sub-user account.' },
-    { value: 'annualSubscription', title: "Annual Subscription (3 or more staff) ", label: '£189.00 Auto-renew annual subscription. Cancel anytime before next auto-renew. Company or individual. Includes three staff or family sub-user accounts' },
-])
+    {
+        value: "quarter",
+        title: "Quarterly subscription",
+        label: "£39.00 Auto-renew quarterly subscription, cancel anytime before next auto-renew. Company or individual."
+    },
+    {
+        value: "annual",
+        title: "Annual Subscription",
+        label:
+            " £119.00 Auto-renewing annual subscription, cancel anytime before next auto-renew. Company or individual. Includes one staff or family sub-user account."
+    },
+    {
+        value: "annualSubscription",
+        title: "Annual Subscription (3 or more staff) ",
+        label:
+            "£189.00 Auto-renew annual subscription. Cancel anytime before next auto-renew. Company or individual. Includes three staff or family sub-user accounts"
+    }
+]);
 
 const schema = Yup.object({
-    name: Yup.string().required('Full Name is required'),
-    email: Yup.string().required('Please enter valid Email').email('Email must be a valid email address'),
-    password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
+    name: Yup.string().required("Full Name is required"),
+    email: Yup.string()
+        .required("Please enter valid Email")
+        .email("Email must be a valid email address"),
+    password: Yup.string()
+        .required("Password is required")
+        .min(6, "Password must be at least 6 characters"),
     confirmPassword: Yup.string()
-        .required('Confirm Password is required')
-        .oneOf([Yup.ref('password')], 'Passwords must match'),
-    firstName: Yup.string().required('Please enter your First Name'),
-    lastName: Yup.string().required('Please enter your Last Name'),
-    privacyPolicy: Yup.string().required('Please agree to Privacy Policy and Terms'),
+        .required("Confirm Password is required")
+        .oneOf([Yup.ref("password")], "Passwords must match"),
+    firstName: Yup.string().required("Please enter your First Name"),
+    lastName: Yup.string().required("Please enter your Last Name"),
+    privacyPolicy: Yup.string().required("Please agree to Privacy Policy and Terms"),
     [checkboxName]: Yup.array()
-        .min(1, 'Please select at least one option')
-        .required('Selection is required'),
-    [paymentModeSelect]: Yup.string()
-        .required('Please select a payment method'),
-    [subscriptionSelect]: Yup.string()
-        .required('Please select a Subscription')
+        .min(1, "Please select at least one option")
+        .required("Selection is required"),
+    [paymentModeSelect]: Yup.string().required("Please select a payment method"),
+    [subscriptionSelect]: Yup.string().required("Please select a Subscription")
 });
 
 function onSubmit(values) {
-    alert('Form submitted successfully!\n' + JSON.stringify(values, null, 2));
+    alert("Form submitted successfully!\n" + JSON.stringify(values, null, 2));
 }
-
 </script>
 
 <style scoped>
@@ -440,7 +532,26 @@ label p {
 tr {
     border: 0px transparent;
 }
-.payment-compo input{
+
+.payment-compo-input input {
     display: none;
+}
+
+.payment-compo label {
+    font-size: 14px;
+    font-weight: 700;
+    width: 100%;
+    height: 100%;
+}
+.check-active {
+    color: #000;
+    top: -20px;
+    right: -5px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
 }
 </style>

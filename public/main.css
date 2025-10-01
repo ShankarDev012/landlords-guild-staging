@@ -53,6 +53,9 @@ p{
 .bg-light-grey{
     background-color: var(--light-grey-color);
 }
+.text-bg-light-grey {
+    background-color: var(--light-grey-color);
+}
 .navbar ul a{
 font-size: 16px;
 font-weight: 500;

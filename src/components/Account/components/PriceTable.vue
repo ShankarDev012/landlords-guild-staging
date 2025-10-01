@@ -11,8 +11,8 @@
                     <p class="fs-2 fw-bold">{{ priceValue.price }}</p>
                     <p class="p-0 m-0">{{ priceValue.priceDes }}</p>
                     <p class="p-0 m-0">{{ priceValue.indvidual }}</p>
-                    <RouterLink to="/signup"><button class="px-2 py-2 w-100 mt-3 text-uppercase"
-                            :class="priceValue.title === 'Annual' ? 'bg-custom-secondary text-white' : ''">View Plan Details</button></RouterLink>
+                    <RouterLink to="/signup"><button class="px-2 py-2 w-100 mt-3 text-uppercase rounded-pill border-0"
+                            :class="priceValue.title === 'Annual' ? 'bg-custom-secondary text-white' : '' ">View Plan Details</button></RouterLink>
                     <ul style="list-style: none;" class="featureList p-0 mt-4">
                         <li v-for="feature in priceValue.feature" :key="feature"><i
                                 class="bi bi-check2-square fs-5"></i> {{ feature.feature }}</li>
